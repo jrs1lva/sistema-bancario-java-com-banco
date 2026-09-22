@@ -3,6 +3,7 @@ package br.com.sistemabancariofix.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.sistemabancariofix.dao.ContaDAO;
 import br.com.sistemabancariofix.dao.UsuarioDAO;
 
 public class Banco {
@@ -11,6 +12,7 @@ public class Banco {
     private final String AGENCIA;
 
     private List<Conta> contas;
+    private ContaDAO contaDAO;
     private UsuarioDAO usuarioDAO;
     
 	public Banco(String nome, String agencia) {
@@ -40,7 +42,7 @@ public class Banco {
     		conta = new ContaPoupanca(usuario);
     	}
     	
-    	contas.add(conta);
+    	contaDAO.criarConta(conta);
     	
     	return conta;
     }

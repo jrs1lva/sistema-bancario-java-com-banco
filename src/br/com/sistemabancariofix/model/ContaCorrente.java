@@ -6,12 +6,10 @@ import java.time.Period;
 public class ContaCorrente extends Conta {
 
 	protected double limite;
-	protected double saldoTotal;
 
 	public ContaCorrente(Usuario usuario) {
 		super(usuario);
 		this.limite = 500.00;
-		this.saldoTotal = limite + saldo; 
 	}
 	//	08007700051 08007512121 08007708510
 	// saldo = 0 | limite = 500
@@ -30,7 +28,6 @@ public class ContaCorrente extends Conta {
  			double resto = (getSaldo() - valor);
 			setSaldo(0);
 			setLimite(getLimite() + resto);
-			setSaldoTotal(limite);
 		} else {
 			setSaldo(getSaldo() - valor);
 		}
@@ -48,11 +45,7 @@ public class ContaCorrente extends Conta {
 	}
 
 	public double getSaldoTotal() {
-		return saldoTotal;
-	}
-
-	public void setSaldoTotal(double saldoTotal) {
-		this.saldoTotal = saldoTotal;
+		return getSaldo() + getLimite();
 	}
 
 	@Override
@@ -87,16 +80,20 @@ public class ContaCorrente extends Conta {
 			if (getLimite() > 500) {
 				double resto = getLimite() - 500;
 				setLimite(500);
-				setSaldo(resto);
+				setSaldo(getSaldo() + resto);
 				
 			}
 		} else {
 			setSaldo(getSaldo() + valor);
 		}
 		
-		setSaldoTotal(getLimite() + getSaldo());
 		extrato.add(String.format("Depósito: R$ %.2f\nSaldo: R$ %.2f\nLimite: R$ %.2f\n", valor, saldo, limite));
 		return true;
+	}
+
+	@Override
+	public Tipo getTipo() {
+		return Tipo.CORRENTE;
 	}
 
 }

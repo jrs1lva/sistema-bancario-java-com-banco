@@ -58,4 +58,9 @@ public class ContaPoupanca extends Conta{
 		return true;
 	}
 
+	@Override
+	public Tipo getTipo() {
+		return Tipo.POUPANCA;
+	}
+
 }

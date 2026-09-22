@@ -9,7 +9,7 @@ public abstract class Conta {
 	protected final Usuario USUARIO;
 	protected double saldo;
 	protected List<String> extrato;
-
+	
 	public Conta(Usuario usuario) {
 		this.USUARIO = usuario;
 		this.saldo = 0;
@@ -18,6 +18,8 @@ public abstract class Conta {
 	}
 	
 	public abstract boolean sacar(double valor);
+	
+	public abstract Tipo getTipo();
 	
 	public abstract boolean depositar(double valor);
 	
